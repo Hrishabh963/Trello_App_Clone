@@ -6,20 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trello</title>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 
 <body>
     <header>
         <h1>Trello</h1>
+        <nav>
+            <ul>
+                <li><a class="active" href="#workspace">Workspace</a></li>
+                <li><a href="#recent">Recent</a></li>
+                <li><a href="#starred">Starred</a></li>
+                <li><a href="#templates">Templates</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
+
     <main id="main">
-        <div id="list"></div>
-        <div id="form">
-            <h2>Add new list</h2>
-            <input type="text" name="list_content" placeholder="Enter List Name" id="list_content">
-            <button type="button" id="add_list">Add list</button>
+        <div id="list">
+            <div class="list_container add_container">
+                <input type="text" name="list_content" placeholder="Enter List Name" id="list_content">
+                <button type="button" id="add_list">Add list</button>
+            </div>
         </div>
     </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 Trello</p>
+            <ul class="social-icons">
+                <li>
+                    <a href="#"><img src="/images/icons8-facebook-48.png" alt="Facebook"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/images/icons8-twitter-48.png" alt="Twitter"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/images/icons8-instagram-48.png" alt="Instagram"></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 </body>
 <script src="/main.js"></script>
 

@@ -5,6 +5,7 @@ const API = {
     BoardID: '6517ab992db0de3930ee493d'
 }
 
+
 const addList = async() => {
     try {
         const value = document.getElementById('list_content').value;
@@ -84,7 +85,16 @@ const displayList = async() => {
         const response = await fetch(`https://api.trello.com/1/boards/${API.BoardID}/lists?key=${API.Key}&token=${API.Token}`)
         const data = await response.json();
         const parentDiv = document.querySelector('#list');
-        parentDiv.innerHTML = '';
+        parentDiv.innerHTML = `<div class="list_container add_container">
+        <div class="add-list-icon" id="toggleList">
+             <i class="fas fa-plus"></i>
+        </div>
+        <div class="add-list-form" id="listForm">
+            <input type="text" name="list_content" placeholder="Enter List Name" id="list_content">
+            <button type="button" id="add_list">Add list</button>
+        </div>
+    </div>
+    `;
         data.forEach(list => {
             const div = document.createElement('div');
             div.className = 'list_container'
@@ -98,13 +108,28 @@ const displayList = async() => {
         `
             parentDiv.appendChild(div);
         });
+        const button = document.getElementById('add_list');
+        button.addEventListener('click', addList);
+
+        const toggleList = document.getElementById('toggleList');
+        const listForm = document.getElementById('listForm');
+        const icon = document.querySelector('.fas.fa-plus');
+
+        toggleList.addEventListener('click', () => {
+            if (listForm.style.display === 'none' || listForm.style.display === '') {
+                listForm.style.display = 'block';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-times', 'rotate-plus-to-cross');
+            } else {
+                listForm.style.display = 'none';
+                icon.classList.remove('fa-times', 'rotate-plus-to-cross');
+                icon.classList.add('fa-plus');
+            }
+        });
+
     } catch (error) {
         console.log(error);
     }
 }
-
-const button = document.getElementById('add_list');
-button.addEventListener('click', addList);
-
 
 displayList();
