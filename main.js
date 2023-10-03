@@ -5,6 +5,7 @@ const API = {
     BoardID: '6517ab992db0de3930ee493d'
 }
 
+//Function to add list into the main container
 
 const addList = async() => {
     try {
@@ -28,6 +29,8 @@ const addList = async() => {
     }
 }
 
+
+//Function to update the list name
 const updateList = async(event) => {
     const id = event.target.parentElement.parentElement.id;
     const value = document.getElementById('updated_value').value;
@@ -66,6 +69,8 @@ const updateForm = async(event) => {
     button.addEventListener('click', updateList);
 }
 
+
+//Function to Delete the list 
 const deleteList = async(event) => {
     try {
         const parent = event.target.parentElement;
@@ -80,6 +85,8 @@ const deleteList = async(event) => {
         console.log(error);
     }
 }
+
+//Main function that renders list
 const displayList = async() => {
     try {
         const response = await fetch(`https://api.trello.com/1/boards/${API.BoardID}/lists?key=${API.Key}&token=${API.Token}`)
@@ -93,19 +100,19 @@ const displayList = async() => {
             <input type="text" name="list_content" placeholder="Enter List Name" id="list_content">
             <button type="button" id="add_list">Add list</button>
         </div>
-    </div>
-    `;
+        </div>
+        `;
         data.forEach(list => {
             const div = document.createElement('div');
             div.className = 'list_container'
             div.id = list.id;
             div.innerHTML = `
-        <p class='list_item'> ${list.name}</p>
-        <div class='update_button_container'>
-        <button type='button' onclick = 'updateForm(event)'>Update</button>
-        </div>
-        <button type='button' onclick = 'deleteList(event)' class='delete_button'>Delete</button>
-        `
+            <p class='list_item'> ${list.name}</p>
+            <div class='update_button_container'>
+            <button type='button' onclick = 'updateForm(event)'>Update</button>
+            </div>
+            <button type='button' onclick = 'deleteList(event)' class='delete_button'>Delete</button>
+            `
             parentDiv.appendChild(div);
         });
         const button = document.getElementById('add_list');
